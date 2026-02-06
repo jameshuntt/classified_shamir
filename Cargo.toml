@@ -1,0 +1,13 @@
+[package]
+name = "classified_shamir"
+version = "0.1.0"
+edition = "2024"
+
+license = "MIT OR Apache-2.0"
+description = "shamir secret sharing using the honest and classified crates"
+
+authors = ["James Hunt <jameshuntdevelopment@gmail.com>"]
+repository = "https://github.com/jameshuntt/classified_shamir"
+
+
+[dependencies]
