@@ -1,25 +1,29 @@
 [package]
 name = "classified_shamir"
-version = "0.1.1"
-edition = "2024"
-
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.70"
 license = "MIT OR Apache-2.0"
-description = "shamir secret sharing using the honest and classified crates"
-
-authors = ["James Hunt <jameshuntdevelopment@gmail.com>"]
+description = "Shamir secret sharing in classified containers: split a ClassifiedBuffer or ClassifiedBytes into shares that zeroize, redact and compare in constant time, with the arithmetic from honest_shamir."
+authors = ["James Hunt <james@1o.business>"]
 repository = "https://github.com/jameshuntt/classified_shamir"
+readme = "README.md"
+keywords = ["shamir", "secret-sharing", "threshold", "zeroize", "security"]
+categories = ["cryptography"]
+include = ["src/**", "tests/**", "examples/**", "Cargo.toml", "README.md", "LICENSE-MIT", "LICENSE-APACHE"]
 
+[features]
+default = ["os-rng"]
+# `split`, `split_bytes` and `refresh` without passing a generator: the operating system's.
+os-rng = ["honest_shamir/os-rng"]
 
 [dependencies]
-rand_utils = "0.1.0"
-honest = "0.1.4"
-classified = "0.1.1"
+classified = { version = "0.2.0", path = "../classified" }
+honest_shamir = { version = "0.1.0", path = "../honest_shamir", default-features = false, features = ["std"] }
 
-rand = "0.9.0"
-secrecy = "0.10.3"
-num-traits = "0.2.19"
-num-integer = "0.1.46"
-num-bigint = { version = "0.4.6", features = ["rand"] }
-subtle = { version = "2.6.1", features = ["std"] }
+[dev-dependencies]
+rand_chacha = "0.9"
 
-zeroize = { version = "1.8.1", features = ["derive"] }
+[[example]]
+name = "custody"
+required-features = ["os-rng"]
